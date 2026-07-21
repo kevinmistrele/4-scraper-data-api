@@ -35,7 +35,7 @@ class IndicatorSummary(BaseModel):
 
 
 class CollectionResult(BaseModel):
-    inserted_or_updated: dict[str, int]
+    inserted_or_updated: dict[str, int | str]
 
 
 @app.on_event("startup")

@@ -28,6 +28,10 @@ def test_upsert_indicators_updates_existing_row(tmp_path: Path) -> None:
     upsert_indicators(frame, database_path)
 
     with get_connection(database_path) as connection:
-        row = connection.execute("SELECT value FROM indicators").fetchone()
+        row = connection.execute(
+            "SELECT year, value, typeof(year) AS year_type FROM indicators"
+        ).fetchone()
 
+    assert row["year"] == 2024
+    assert row["year_type"] == "integer"
     assert row["value"] == 2.0

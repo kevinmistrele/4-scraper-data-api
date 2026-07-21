@@ -135,12 +135,11 @@ black --check .
 
 ## Prints do dashboard
 
+![Dashboard com series historicas de indicadores do Brasil](docs/dashboard.png)
+
 Depois de iniciar API e dashboard, acesse `http://localhost:8501`. A tela principal mostra:
 
 - seletor de indicador;
 - metricas resumidas do ultimo ano disponivel;
 - grafico de linha da serie historica;
 - tabela com os registros coletados.
-
-Para documentacao de portfolio, salve um print dessa tela em `docs/dashboard.png` apos executar
-uma coleta real.

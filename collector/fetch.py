@@ -18,7 +18,7 @@ def fetch_indicator(
     *,
     per_page: int = 100,
     retries: int = 3,
-    timeout: float = 10.0,
+    timeout: float = 30.0,
 ) -> list[dict[str, Any]]:
     params = {"format": "json", "per_page": per_page, "page": 1}
     records: list[dict[str, Any]] = []

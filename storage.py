@@ -41,17 +41,18 @@ def upsert_indicators(frame: pd.DataFrame, database_path: Path = DATABASE_PATH) 
         return 0
 
     initialize_database(database_path)
-    rows = frame[
-        [
-            "country_code",
-            "country_name",
-            "indicator_code",
-            "indicator_name",
-            "year",
-            "value",
-            "source",
-        ]
-    ].itertuples(index=False, name=None)
+    rows = [
+        (
+            str(row.country_code),
+            str(row.country_name),
+            str(row.indicator_code),
+            str(row.indicator_name),
+            int(row.year),
+            float(row.value),
+            str(row.source),
+        )
+        for row in frame.itertuples(index=False)
+    ]
 
     with get_connection(database_path) as connection:
         connection.executemany(
@@ -73,6 +74,6 @@ def upsert_indicators(frame: pd.DataFrame, database_path: Path = DATABASE_PATH) 
                 source = excluded.source,
                 collected_at = CURRENT_TIMESTAMP
             """,
-            list(rows),
+            rows,
         )
         return connection.total_changes
